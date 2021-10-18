@@ -35,4 +35,9 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
+	public void addRandomId(String id, String randomID) {
+		User user=userRepository.findById(id).get();
+		user.setRandomID(randomID);
+		userRepository.save(user);
+	}
 }
