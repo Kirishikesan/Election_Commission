@@ -112,20 +112,6 @@ public class RSA {
     	};
     	return Byte;
     }
-//    public File getFile(File dir, String filename) {
-//    	File file = new File(dir, filename);
-//        File parent = file.getParentFile();
-//        if (parent != null)
-//            parent.mkdirs();
-//        return file;
-//    }
-//    
-//    public File getEncryptionCertificate() {
-//    	return getFile(privateEncryptionKeyDir)
-//    }
-//    public byte[] getCertificate() {
-//    	InputStream in = getClass().getResourceAsStream("../electionCommission/src/main/resources/keys/encryption/private.der");
-//    	return IOUtils.toByteArray(in);
-//    }
+
 
 }
