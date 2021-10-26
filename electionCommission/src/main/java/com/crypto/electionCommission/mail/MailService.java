@@ -16,23 +16,29 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.crypto.electionCommission.user.UserService;
 
 
 @Service
 public class MailService {
 	
-   public String sendEmail(String email) {
+	@Autowired
+    private UserService userService;
+	
+    public String sendEmail(String email) {
 	  try {
-		  sendRandomID(email);
-	      return "Email sent successfully";
+		  return(sendRandomID(email));
 	  }catch(Exception e) {
 		  System.out.println(e);
-		  return "Error in sending email";
+		  System.out.println("Error in sending email");
+		  return "";
 	  }
    }   
 
-   private void sendRandomID(String email) throws AddressException, MessagingException, IOException, NoSuchAlgorithmException {
+   private String sendRandomID(String email) throws AddressException, MessagingException, IOException, NoSuchAlgorithmException {
 	   Properties props = new Properties();
 	   props.put("mail.smtp.auth", "true");
 	   props.put("mail.smtp.starttls.enable", "true");
@@ -43,7 +49,7 @@ public class MailService {
 	   SecureRandom CSPRNG = new SecureRandom(seed);
 	   String randomID=Integer.toString(CSPRNG.nextInt(99999999));
 	   
-
+	   
 	   
 	   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 	      protected PasswordAuthentication getPasswordAuthentication() {
@@ -60,8 +66,9 @@ public class MailService {
 
 	   MimeBodyPart messageBodyPart = new MimeBodyPart();
 	   messageBodyPart.setContent("Online Election Mail", "text/html");
-
+	   
 	   
 	   Transport.send(msg);   
+	   return randomID;
 	}
 }

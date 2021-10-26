@@ -38,12 +38,13 @@ public class User {
 		
 	}
 	
-	public User(String id, String name, String deviceID, String randomID) {
+	public User(String id, String name, String deviceID, String randomID, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.deviceID = deviceID;
 		this.randomID = randomID;
+		this.email = email;
 	}
 
 

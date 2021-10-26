@@ -24,6 +24,7 @@ public class MobileController {
 	
 	@Autowired
 	private MobileService mobileService;
+
 	
 	@RequestMapping(value = "/config")
 	public void getCertificate(HttpServletRequest request, HttpServletResponse response){

@@ -53,7 +53,6 @@ public class MobileService {
             	ex.printStackTrace();
             }
 		}
-		
 	}
 	
 	public void sendRandomID(@RequestBody String request) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
@@ -63,7 +62,11 @@ public class MobileService {
 		String deviceID=requestJson.get("deviceID").getAsString();
 		User user=userService.getUser(id);
 		if(user.getDeviceID().equals(deviceID)) {
-			mailService.sendEmail(user.getEmail());
+			String email=mailService.sendEmail(user.getEmail());
+			if(email.length()!=0) {
+				user.setEmail(email);
+				userService.updateUser(id, user);
+			}
 		}else {
 			System.out.println("DeviceID not valid");
 		}

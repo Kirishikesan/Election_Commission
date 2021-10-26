@@ -35,10 +35,9 @@ public class TransferController {
 	
 	@GetMapping(value="/initiatetransfer")
 	public void initiateTransfer() {
-		String uri = "http://localhost:8080/initiatetransfer";
+		String uri = "http://localhost:8080/transfer";
 		RestTemplate restTemplate = new RestTemplate();
 		File result = restTemplate.getForObject(uri, File.class);
-		
 	}
 	
 	@RequestMapping(value = "/config")
