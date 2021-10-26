@@ -15,7 +15,25 @@ public class User {
 	private String deviceID;
 	@Column(unique=true)
 	private String randomID;
+	@Column(nullable = false,unique=true)
+	private String email;
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public User() {
 		
 	}

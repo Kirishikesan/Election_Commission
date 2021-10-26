@@ -62,7 +62,7 @@ public class MailController {
 	   msg.setSentDate(new Date());
 
 	   MimeBodyPart messageBodyPart = new MimeBodyPart();
-	   messageBodyPart.setContent("Tutorials point email", "text/html");
+	   messageBodyPart.setContent("Online Election Mail", "text/html");
 
 //	   Multipart multipart = new MimeMultipart();
 //	   multipart.addBodyPart(messageBodyPart);

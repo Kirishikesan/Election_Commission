@@ -1,14 +1,18 @@
-package com.crypto.electionCommission;
+package com.crypto.electionCommission.https;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,9 +32,12 @@ import java.util.Base64;
 
 @Component
 public class RSA {
-
-    Path privateEncryptionKeyFile = Paths.get("../electionCommission/src/main/resources/keys/encryption/private.der");
-    Path privateSignKeyFile = Paths.get("../electionCommission/src/main/resources/keys/signature/private.der");
+	String privateEncryptionKeyDir ="../electionCommission/src/main/resources/keys/encryption/";
+	String privateEncryptionKeyPath = "private.der";
+	String privateSignKeyDir="../electionCommission/src/main/resources/keys/signature/";
+	String privateSignKeyPath = "private.der";
+    Path privateEncryptionKeyFile = Paths.get(privateEncryptionKeyDir+privateEncryptionKeyPath);
+    Path privateSignKeyFile = Paths.get(privateSignKeyDir+privateSignKeyPath);
 
     public String encrypt(Certificate certificate, String message){
         RSAPublicKey publicKey = (RSAPublicKey) certificate.getPublicKey();
@@ -71,7 +78,7 @@ public class RSA {
         return Base64.getEncoder().encodeToString(signBytes);
     }
 
-    public boolean varifySignature(String message, Certificate signingCertificate){
+    public boolean verifySignature(String message, Certificate signingCertificate){
         RSAPublicKey publicVarifyKey = (RSAPublicKey) signingCertificate.getPublicKey();
 
         byte[] decodeSign = Base64.getDecoder().decode(message);
@@ -98,5 +105,27 @@ public class RSA {
     public String getSHA256Hash(String data){
         return DigestUtils.sha256Hex(data);
     }
+    
+    public byte[] getCertificate() {
+    	byte[] Byte= new byte[] {
+    			
+    	};
+    	return Byte;
+    }
+//    public File getFile(File dir, String filename) {
+//    	File file = new File(dir, filename);
+//        File parent = file.getParentFile();
+//        if (parent != null)
+//            parent.mkdirs();
+//        return file;
+//    }
+//    
+//    public File getEncryptionCertificate() {
+//    	return getFile(privateEncryptionKeyDir)
+//    }
+//    public byte[] getCertificate() {
+//    	InputStream in = getClass().getResourceAsStream("../electionCommission/src/main/resources/keys/encryption/private.der");
+//    	return IOUtils.toByteArray(in);
+//    }
 
 }
